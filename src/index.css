@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+  img {
+    vertical-align: middle;
+  }
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+  ul,
+  li,
+  ol {
+    list-style: none;
+  }
+}
+:root {
+  --white_color: #ffffff;
+  --white_F5F5F5: #f5f5f5;
+  --white_FEFAF1: #fefaf1;
+  --white_FFFFFF: #ffffff;
+  --black_738: #363738;
+  --text_whiteFAFAFA: #fafafa;
+  --text_gray7D8184: #7d8184;
+  --text_black000000: #000000;
+  --text_reddb4444: #db4444;
+  --button_green00ff66: #00ff66;
+  --hover_colore07575: #e07575;
+  --hover_buttona0bce0: #a0bce0;
+  --poppins: "Poppins", sans-serif;
+  --Inter: "Inter", sans-serif;
+}
+
+@layer components {
+  .menuUnderLine {
+    position: relative;
+  }
+  .menuUnderLine::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: var(--black_738);
+    transform: scale(0);
+    transition: all linear 0.2s;
+  }
+  .menuUnderLine:hover::after {
+    transform: scale(1);
+  }
+
+  .amount {
+    position: relative;
+  }
+
+  .amount::after {
+    position: absolute;
+    content: "0";
+    left: 39%;
+    top: -52%;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    background-color: var(--text_reddb4444);
+    border-radius: 50%;
+    text-align: center;
+    color: var(--white_color);
+    font-size: 15px;
+  }
+}
