@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
 
-const Timer = () => {
-  const [time, setTime] = useState(3 * 24 * 60 * 60 * 1000);
+const Timer = (timeofOffer) => {
+  const [time, setTime] = useState(3 * 24 * 60 * 60 * 1000 || 0);
 
   //   New Worker for the countDown timer
 

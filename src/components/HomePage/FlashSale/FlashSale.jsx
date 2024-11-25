@@ -1,56 +1,23 @@
 import React from "react";
-import Heading from "../../CommonComponents/Heading";
-import Timer from "../../CommonComponents/Timer";
 import ProductCard from "../../CommonComponents/ProductCard";
-import Slider from "react-slick";
+import ProductCommonLayout from "../../CommonComponents/ProductCommonLayout";
 
 const FlashSale = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    autoplay: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "red" }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "green" }}
-        onClick={onClick}
-      />
-    );
-  }
   return (
-    <div className="mt-[140px] mb-[60px] ">
-      <div className="container">
-        <div className="flex items-end gap-x-[87px]">
-          <Heading title={"Today's"} description={"Flash Sale"} />
-          <Timer />
-        </div>
-        <div className="slider-container">
-          <Slider {...settings}>
-            {[...new Array(12)].map((_, index) => (
-              <div className="pr-6">
-                <ProductCard />
-              </div>
-            ))}
-          </Slider>
+    <div className="container">
+      <div className="flex flex-col items-center border-b-[1px] border-b-black_738 mb-10">
+        <ProductCommonLayout
+          ProductCard={ProductCard}
+          timeStamp={true}
+          timeofOffer={1}
+          isArrowsTrue={true}
+          heading="Today's"
+          description="Flash Sales"
+        />
+        <div className="pb-20">
+          <button className="px-[48px] py-4 bg-text_reddb4444 rounded text-md font-poppins font-medium text-white_FFFFFF hover:opacity-75 cursor-pointer ">
+            View All Products
+          </button>
         </div>
       </div>
     </div>

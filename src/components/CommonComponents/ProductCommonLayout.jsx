@@ -1,0 +1,77 @@
+import React, { useRef } from "react";
+import Heading from "./Heading";
+import Timer from "./Timer";
+import Slider from "react-slick";
+import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
+import ProductSkeleton from "../../Helpers/ProductSkeleton";
+
+const ProductCommonLayout = ({
+  ProductCard = () => {
+    <ProductSkeleton />;
+  },
+  timeStamp = false,
+  isArrowsTrue = false,
+  timeofOffer = 0,
+  heading = "Today's",
+  description = "Flash Sale",
+}) => {
+  const sliderRef = useRef(null);
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    autoplay: true,
+  };
+
+  const next = () => {
+    sliderRef.current.slickNext();
+  };
+  const prev = () => {
+    sliderRef.current.slickPrev();
+  };
+  return (
+    <div className="mt-[140px] mb-[60px]">
+      <div className="container">
+        <div className="flex justify-between items-center">
+          <div className="flex items-end gap-x-[87px]">
+            <Heading title={heading} description={description} />
+            {timeStamp && <Timer timeofOffer={timeofOffer} />}
+          </div>
+          {isArrowsTrue && (
+            <div className="flex items-center gap-x-4">
+              <h1
+                onClick={next}
+                className="cursor-pointer w-[46px] h-[46px] bg-white_F5F5F5 rounded-full flex items-center justify-center hover:bg-black_363738 hover:text-white_FFFFFF transition"
+              >
+                <span className="text-xl">
+                  <IoMdArrowBack />
+                </span>
+              </h1>
+              <h1
+                onClick={prev}
+                className="cursor-pointer w-[46px] h-[46px] bg-white_F5F5F5 rounded-full flex items-center justify-center hover:bg-black_363738 hover:text-white_FFFFFF transition"
+              >
+                <span className="text-xl">
+                  <IoMdArrowForward />
+                </span>
+              </h1>
+            </div>
+          )}
+        </div>
+        <div className="slider-container">
+          <Slider ref={sliderRef} {...settings}>
+            {[...new Array(12)].map((_, index) => (
+              <div className="pr-6">
+                <ProductCard />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCommonLayout;
