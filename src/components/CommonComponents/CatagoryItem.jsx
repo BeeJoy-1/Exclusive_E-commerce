@@ -1,12 +1,13 @@
 import React from "react";
 
-const CatagoryItem = ({ componentData }) => {
-  const { id, name, img } = componentData[0];
+const CatagoryItem = ({ itemData }) => {
   return (
-    <div>
-      <div className="w-full h-[145px] bg-text_gray7D8184">
-        <span>{img}</span>
-        <h1>{name}</h1>
+    <div className="mt-16">
+      <div className="w-full h-[145px] bg-transparent rounded border-[1px] border-text_gray7D8184 flex items-center justify-center cursor-pointer hover:bg-text_reddb4444 hover:text-white_FFFFFF hover:border-transparent transition-all ">
+        <div className="flex flex-col items-center gap-y-3">
+          <span className="text-[30px]">{itemData.image}</span>
+          <h1 className="text-lg font-poppins font-normal">{itemData.name}</h1>
+        </div>
       </div>
     </div>
   );
