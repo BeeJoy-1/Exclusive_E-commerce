@@ -4,10 +4,9 @@ import p1 from "../../assets/products/p1.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { CalculateDiscountPrice } from "../../Helpers/MakeDiscount";
+import Star from "./Star";
 
 const ProductCard = ({ itemData }) => {
-  console.log(itemData);
-
   return (
     <div className="mt-10">
       <div className="">
@@ -56,15 +55,8 @@ const ProductCard = ({ itemData }) => {
           </div>
           <div>
             <div className="flex items-center gap-x-1 cursor-pointer">
-              {" "}
-              {[...new Array(5)].map((_, index) => (
-                <span className="text-yellow-300" key={index}>
-                  <FaStar />
-                </span>
-              ))}
-              <h3 className="text-text_black000000 font-medium font-poppins text-[16px] inline-block opacity-50 ">{`(${
-                [...new Array(5)]?.length
-              })`}</h3>
+              <Star rating={itemData ? itemData.rating : 0} />
+              <h3 className="text-text_black000000 font-medium font-poppins text-[16px] inline-block opacity-50 ">{`(${itemData?.reviews?.length})`}</h3>
             </div>
           </div>
         </div>
