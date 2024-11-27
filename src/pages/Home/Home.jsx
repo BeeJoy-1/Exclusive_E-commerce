@@ -5,6 +5,7 @@ import Banner from "../../components/HomePage/Banner/Banner";
 import FlashSale from "../../components/HomePage/FlashSale/FlashSale";
 import Catagory from "../../components/HomePage/Catagory/Catagory";
 import BestSelling from "../../components/HomePage/BestSelling/BestSelling";
+import Experience from "../../components/HomePage/Experience/Experience";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <FlashSale />
       <Catagory />
       <BestSelling />
+      <Experience />
     </div>
   );
 };
