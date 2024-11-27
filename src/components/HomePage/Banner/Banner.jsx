@@ -20,7 +20,7 @@ const Banner = () => {
           position: "Absolute",
           bottom: "5%",
           left: "50%",
-          transform: "translateX(-5%)",
+          transform: "translateX(-50%)",
           borderRadius: "10px",
           padding: "10px",
         }}
@@ -28,7 +28,6 @@ const Banner = () => {
         <ul
           style={{
             margin: "0px",
-            display: "flex",
           }}
         >
           {dots}

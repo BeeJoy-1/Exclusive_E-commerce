@@ -14,7 +14,7 @@ const ProductCommonLayout = ({
   description = "Flash Sale",
   PartialItemShow = 4,
   componentData = [],
-  isLoading,
+  isLoading = false,
 }) => {
   const sliderRef = useRef(null);
   const settings = {
