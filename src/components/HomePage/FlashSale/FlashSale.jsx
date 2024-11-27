@@ -1,8 +1,11 @@
 import React from "react";
 import ProductCard from "../../CommonComponents/ProductCard";
 import ProductCommonLayout from "../../CommonComponents/ProductCommonLayout";
+import { useGetAllProductQuery } from "../../../Features/Api/ProductApi";
 
 const FlashSale = () => {
+  const { data, error, isLoading } = useGetAllProductQuery();
+
   return (
     <div className="container">
       <div className="flex flex-col items-center border-b-[1px] border-b-black_738 mb-10">
@@ -13,7 +16,8 @@ const FlashSale = () => {
           isArrowsTrue={true}
           heading="Today's"
           description="Flash Sales"
-          componentData={[...new Array(10)]}
+          componentData={data?.products}
+          isLoading={isLoading}
         />
         <div className="pb-20">
           <button className="px-[48px] py-4 bg-text_reddb4444 rounded text-md font-poppins font-medium text-white_FFFFFF hover:opacity-75 cursor-pointer ">
