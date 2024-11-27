@@ -27,10 +27,10 @@ const ProductCommonLayout = ({
   };
 
   const next = () => {
-    sliderRef.current.slickNext();
+    sliderRef.current.slickPrev();
   };
   const prev = () => {
-    sliderRef.current.slickPrev();
+    sliderRef.current.slickNext();
   };
   return (
     <div className="mt-[140px] mb-[60px]">
