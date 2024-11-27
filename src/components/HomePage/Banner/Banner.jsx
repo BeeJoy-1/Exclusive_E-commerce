@@ -71,8 +71,11 @@ const Banner = () => {
         <div className="flex justify-between">
           <div className="w-[24%]  border-r-[1.5px] border-r-text_gray7D8184">
             <ul className="pt-10 pb-2">
-              {catagory?.map((item) => (
-                <div className="flex items-center justify-between hover:bg-gray-200 group cursor-pointer">
+              {catagory?.map((item, index) => (
+                <div
+                  className="flex items-center justify-between hover:bg-gray-200 group cursor-pointer"
+                  key={index}
+                >
                   <li className="font-poppins text-md text-text_black000000 font-normal py-3 group-hover:pl-4 transition-all">
                     {item.catagory}
                   </li>

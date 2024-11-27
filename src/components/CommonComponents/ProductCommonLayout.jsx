@@ -64,13 +64,19 @@ const ProductCommonLayout = ({
         <div className="slider-container">
           <Slider ref={sliderRef} {...settings}>
             {isLoading
-              ? [...new Array(4)].map((item, index) => (
-                  <div className={PartialItemShow > 4 ? "pr-8" : "pr-6"}>
+              ? [...new Array(4)].map((_, index) => (
+                  <div
+                    className={PartialItemShow > 4 ? "pr-8" : "pr-6"}
+                    key={index}
+                  >
                     <ProductSkeleton />
                   </div>
                 ))
               : componentData?.map((item, index) => (
-                  <div className={PartialItemShow > 4 ? "pr-8" : "pr-6"}>
+                  <div
+                    className={PartialItemShow > 4 ? "pr-8" : "pr-6"}
+                    key={index}
+                  >
                     <ProductCard itemData={item ? item : {}} />
                   </div>
                 ))}
