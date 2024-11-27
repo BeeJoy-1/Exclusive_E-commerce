@@ -15,6 +15,7 @@ const ProductCommonLayout = ({
   PartialItemShow = 4,
   componentData = [],
   isLoading = false,
+  viewButton = false,
 }) => {
   const sliderRef = useRef(null);
   const settings = {
@@ -58,6 +59,11 @@ const ProductCommonLayout = ({
                   <IoMdArrowForward />
                 </span>
               </h1>
+            </div>
+          )}
+          {viewButton && (
+            <div className="bg-text_reddb4444 text-md font-poppins font-medium text-white_FFFFFF px-[48px] py-4 rounded cursor-pointer hover:opacity-85">
+              View All
             </div>
           )}
         </div>
