@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import boximg from "../../../assets/experience/box.png";
 
 const Experience = () => {
+  const [time, setTime] = useState(3 * 24 * 60 * 60 * 1000 || 0);
+
+  //   New Worker for the countDown timer
+
+  useEffect(() => {
+    const worker = new Worker(
+      new URL("../../../Workers/CountDown2worker.js", import.meta.url)
+    );
+    worker.postMessage(time);
+    worker.onmessage = (e) => {
+      setTime(e.data);
+    };
+  }, []);
+
+  const formateDate = (milisecond) => {
+    let total_sec = parseInt(Math.floor(milisecond / 1000));
+    let total_min = parseInt(Math.floor(total_sec / 60));
+    let total_hour = parseInt(Math.floor(total_min / 60));
+    let day = parseInt(Math.floor(total_hour / 24));
+    let second = parseInt(Math.floor(total_sec % 60));
+    let minute = parseInt(Math.floor(total_min % 60));
+    let hours = parseInt(Math.floor(total_hour % 60));
+    return { day, second, minute, hours };
+  };
+
+  const { day, second, minute, hours } = formateDate(time);
   return (
     <div className=" my-[140px]">
       <div className="container">
@@ -16,7 +42,15 @@ const Experience = () => {
             <div className="flex gap-x-6 items-center mt-[32px]">
               <div className="w-[62px] h-[62px] rounded-full bg-white_FFFFFF flex flex-col items-center justify-center">
                 <p className="text-text_black000000 text-[16px] font-poppins font-semibold">
-                  25
+                  {day ? day : 0}
+                </p>
+                <p className="text-text_black000000 text-[11px] font-poppins font-normal">
+                  Days
+                </p>
+              </div>
+              <div className="w-[62px] h-[62px] rounded-full bg-white_FFFFFF flex flex-col items-center justify-center">
+                <p className="text-text_black000000 text-[16px] font-poppins font-semibold">
+                  {hours ? hours : 0}
                 </p>
                 <p className="text-text_black000000 text-[11px] font-poppins font-normal">
                   Hours
@@ -24,26 +58,18 @@ const Experience = () => {
               </div>
               <div className="w-[62px] h-[62px] rounded-full bg-white_FFFFFF flex flex-col items-center justify-center">
                 <p className="text-text_black000000 text-[16px] font-poppins font-semibold">
-                  25
+                  {minute ? minute : 0}
                 </p>
                 <p className="text-text_black000000 text-[11px] font-poppins font-normal">
-                  Hours
+                  Minutes
                 </p>
               </div>
               <div className="w-[62px] h-[62px] rounded-full bg-white_FFFFFF flex flex-col items-center justify-center">
                 <p className="text-text_black000000 text-[16px] font-poppins font-semibold">
-                  25
+                  {second ? second : 0}
                 </p>
                 <p className="text-text_black000000 text-[11px] font-poppins font-normal">
-                  Hours
-                </p>
-              </div>
-              <div className="w-[62px] h-[62px] rounded-full bg-white_FFFFFF flex flex-col items-center justify-center">
-                <p className="text-text_black000000 text-[16px] font-poppins font-semibold">
-                  25
-                </p>
-                <p className="text-text_black000000 text-[11px] font-poppins font-normal">
-                  Hours
+                  Seconds
                 </p>
               </div>
             </div>
