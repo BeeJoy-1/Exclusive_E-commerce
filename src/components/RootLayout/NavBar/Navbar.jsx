@@ -67,7 +67,7 @@ const Navbar = () => {
                       isPending
                         ? " text-black text-[16px] font-normal font-poppins"
                         : isActive
-                        ? " bg-red-500 text-[16px] font-normal font-poppins"
+                        ? " text-red-500 text-[16px] font-normal font-poppins"
                         : "text-black text-[16px] font-normal font-poppins"
                     }
                   >

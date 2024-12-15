@@ -13,8 +13,6 @@ import Footer from "../../components/RootLayout/Footer/Footer";
 const Home = () => {
   return (
     <div>
-      <Header />
-      <Navbar />
       <Banner />
       <FlashSale />
       <Catagory />
