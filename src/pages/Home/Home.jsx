@@ -7,6 +7,8 @@ import Catagory from "../../components/HomePage/Catagory/Catagory";
 import BestSelling from "../../components/HomePage/BestSelling/BestSelling";
 import Experience from "../../components/HomePage/Experience/Experience";
 import ExploreProduct from "../../components/HomePage/ExploreProduct/ExploreProduct";
+import CustomerService from "../../components/HomePage/CustomerService/CustomerService";
+import Footer from "../../components/RootLayout/Footer/Footer";
 
 const Home = () => {
   return (
@@ -19,6 +21,7 @@ const Home = () => {
       <BestSelling />
       <Experience />
       <ExploreProduct />
+      <CustomerService />
     </div>
   );
 };
