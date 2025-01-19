@@ -8,10 +8,10 @@ const ProductPage = () => {
   const { data, error, isLoading } = useGetAllProductCategoryListQuery();
 
   return (
-    <div className="container py-20">
+    <div className="container pt-5 pb-20">
       <div className="">
         <BreadCrumbs />
-        <div className="flex ">
+        <div className="flex justify-between">
           <ProductLeft
             categoryData={data}
             isLoading={isLoading}
