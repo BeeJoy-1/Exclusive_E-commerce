@@ -2,6 +2,7 @@ import React from "react";
 import BreadCrumbs from "../../components/CommonComponents/BreadCrumbs";
 import ImageGallary from "../../components/CommonComponents/ProductDetailComponents/ImageGallary";
 import { useGetSingleProductQuery } from "../../Features/Api/ProductApi";
+import ProductInfo from "../../components/CommonComponents/ProductDetailComponents/ProductInfo";
 
 const ProductDetail = () => {
   const { data, error, isLoading } = useGetSingleProductQuery(parseInt(1));
@@ -14,7 +15,9 @@ const ProductDetail = () => {
           <div className="">
             <ImageGallary Image={data?.images} />
           </div>
-          <div className=" bg-blue-400 ">2</div>
+          <div className="">
+            <ProductInfo Data={data} />
+          </div>
         </div>
       </div>
     </div>
