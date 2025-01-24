@@ -30,7 +30,7 @@ const ImageGallary = ({ Image }) => {
   };
 
   return (
-    <div className="flex gap-x-5">
+    <div className="flex gap-x-8">
       <div className="grid grid-rows-4 gap-y-4">
         {Image?.map((item, index) => (
           <div className="flex items-center justify-center" key={index}>
