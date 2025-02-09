@@ -17,8 +17,7 @@ const ProductDetail = () => {
   const { data, error, isLoading } = useGetSingleProductQuery(
     parseInt(Params?.id)
   );
-
-  const CategoryData = useGetProductByCategoryQuery("Beauty");
+  const CategoryData = useGetProductByCategoryQuery(data?.category);
 
   var settings = {
     dots: true,
@@ -26,6 +25,7 @@ const ProductDetail = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 3,
+    dots: false,
   };
 
   return (

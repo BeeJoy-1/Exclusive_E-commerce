@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const ImageGallary = ({ Image }) => {
   const [initialState, setinitialState] = useState(
     (Image && Image[0]) ||
       "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   );
+
+  const params = useParams();
+
+  useEffect(() => {
+    setinitialState(Image[0]);
+  }, [params?.id]);
 
   const [zoomStyle, setZoomStyle] = useState({
     transform: "scale(1)",
