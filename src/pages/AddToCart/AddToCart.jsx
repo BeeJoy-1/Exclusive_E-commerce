@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useGetAllProductQuery } from "../../Features/Api/ProductApi";
 const AddToCart = () => {
   const { data, isLoading, error } = useGetAllProductQuery();
-  console.log(data);
 
   return (
     <div className="my-20">
@@ -57,7 +56,7 @@ const AddToCart = () => {
                     />
 
                     <span
-                      className="w-[20px] h-[20px] rounded-full bg-redDB4444 absolute text-white_FFFFFF flex justify-center items-center top-[-2%] left-[15%] font-semibold cursor-pointer hover:opacity-70"
+                      className="w-[20px] h-[20px] rounded-full bg-text_reddb4444 absolute text-white_FFFFFF flex justify-center items-center top-[-2%] left-[15%] font-semibold cursor-pointer hover:opacity-70"
                       onClick={() => handleRemoveCart(item)}
                     >
                       X

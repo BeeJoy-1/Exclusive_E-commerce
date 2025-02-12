@@ -50,6 +50,12 @@
   border-radius: 10px;
 }
 
+/* Handle */
+.custom_scrollbar::-webkit-scrollbar-thumb {
+  background: var(--hover_colore07575);
+  border-radius: 10px;
+}
+
 @layer components {
   .menuUnderLine {
     position: relative;
