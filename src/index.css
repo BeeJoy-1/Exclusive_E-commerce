@@ -41,6 +41,10 @@
   --Inter: "Inter", sans-serif;
 }
 
+span {
+  display: inline-block;
+}
+
 .custom_scrollbar::-webkit-scrollbar {
   width: 7px;
 }
