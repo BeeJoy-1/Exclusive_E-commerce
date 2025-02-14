@@ -20,11 +20,15 @@ const Navbar = () => {
     },
     {
       id: 3,
-      item: "SignUp",
+      item: "ProductDetail",
     },
     {
       id: 4,
       item: "Contact",
+    },
+    {
+      id: 5,
+      item: "SignUp",
     },
   ];
 

@@ -3,6 +3,7 @@ import LoginImg from "../../../assets/login/Login.gif";
 import { useFormik } from "formik";
 import { LoginSchema } from "../../../Validation/Schema/LoginSchema";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [eye, seteye] = useState(false);
@@ -82,9 +83,12 @@ const Login = () => {
                   >
                     Log In
                   </button>
-                  <span className="font-poppins font-medium text-text_reddb4444 text-[16px] cursor-pointer">
+                  <Link
+                    to="/ForgotPassword"
+                    className="font-poppins font-medium text-text_reddb4444 text-[16px] cursor-pointer"
+                  >
                     Forget Password?
-                  </span>
+                  </Link>
                 </div>
               </form>
             </div>
