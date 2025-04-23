@@ -2,9 +2,16 @@ import React from "react";
 import ProductCard from "../../CommonComponents/ProductCard";
 import ProductCommonLayout from "../../CommonComponents/ProductCommonLayout";
 import { useGetAllProductQuery } from "../../../Features/Api/ProductApi";
+import { useGetAllFlashSaleQuery } from "../../../Features/Api/ExclusiveApi";
 
 const FlashSale = () => {
-  const { data, error, isLoading } = useGetAllProductQuery();
+  // const { data, error, isLoading } = useGetAllProductQuery();
+  const { data, error, isLoading } = useGetAllFlashSaleQuery();
+
+  const FlashSaleProducts = data?.data?.map((item) => {
+    return item.ProductID;
+  });
+  console.log(FlashSaleProducts);
 
   return (
     <div className="container">
@@ -16,7 +23,7 @@ const FlashSale = () => {
           isArrowsTrue={true}
           heading="Today's"
           description="Flash Sales"
-          componentData={data?.products}
+          componentData={FlashSaleProducts}
           isLoading={isLoading}
         />
         <div className="pb-20">

@@ -36,7 +36,7 @@ const ProductCommonLayout = ({
     sliderRef.current.slickNext();
   };
   return (
-    <div className="mt-[140px] mb-[60px]">
+    <div className="mt-[110px] mb-[60px]">
       <div className="container">
         <div className="flex justify-between items-center">
           <div className="flex items-end gap-x-[87px]">
