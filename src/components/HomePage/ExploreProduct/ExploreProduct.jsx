@@ -2,9 +2,16 @@ import React from "react";
 import ProductCommonLayout from "../../CommonComponents/ProductCommonLayout";
 import ProductCard from "../../CommonComponents/ProductCard";
 import { useGetAllProductQuery } from "../../../Features/Api/ProductApi";
+import { useGetAllProductsQuery } from "../../../Features/Api/ExclusiveApi";
 
 const ExploreProduct = () => {
-  const { data, error, isLoading } = useGetAllProductQuery();
+  // const { data, error, isLoading } = useGetAllProductQuery();
+  const { data, error, isLoading } = useGetAllProductsQuery();
+  const AllProducts = data?.data?.map((item) => {
+    return item;
+  });
+  console.log(AllProducts);
+
   return (
     <div className="container">
       <div className="flex flex-col items-center border-b-[1px] border-b-black_738 mb-10">
@@ -15,7 +22,7 @@ const ExploreProduct = () => {
             heading="Our Products"
             description="Explore Our Products"
             PartialItemShow={4}
-            componentData={data?.products}
+            componentData={AllProducts}
             isLoading={isLoading}
             rows={2}
           />

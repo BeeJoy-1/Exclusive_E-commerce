@@ -11,7 +11,6 @@ const FlashSale = () => {
   const FlashSaleProducts = data?.data?.map((item) => {
     return item.ProductID;
   });
-  console.log(FlashSaleProducts);
 
   return (
     <div className="container">
