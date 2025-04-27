@@ -5,7 +5,7 @@ import { ExclusiveApi } from "./Api/ExclusiveApi";
 
 export const store = configureStore({
   reducer: {
-    count: counterSlice,
+    category: counterSlice,
     [ProductApi.reducerPath]: ProductApi.reducer,
     [ExclusiveApi.reducerPath]: ExclusiveApi.reducer,
   },

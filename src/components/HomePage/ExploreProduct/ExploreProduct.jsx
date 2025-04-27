@@ -10,7 +10,6 @@ const ExploreProduct = () => {
   const AllProducts = data?.data?.map((item) => {
     return item;
   });
-  console.log(AllProducts);
 
   return (
     <div className="container">

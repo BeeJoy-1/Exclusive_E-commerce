@@ -1,6 +1,8 @@
 import React from "react";
 
 const ProductLeft = ({ categoryData, isLoading, error }) => {
+  // console.log("categoryData", categoryData);
+
   return (
     <div className="w-[24%]  border-r-[1.5px] border-r-text_gray7D8184">
       <h1 className="font-poppins font-bold text-[20px] text-text_black000000">
@@ -27,7 +29,7 @@ const ProductLeft = ({ categoryData, isLoading, error }) => {
               key={index}
             >
               <li className="font-poppins text-md text-text_black000000 font-normal py-3 group-hover:pl-4 transition-all capitalize">
-                {item}
+                {item.Title}
               </li>
             </div>
           ))}
