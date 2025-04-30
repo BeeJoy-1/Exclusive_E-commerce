@@ -15,6 +15,9 @@ export const ExclusiveApi = createApi({
     GetAllProducts: builder.query({
       query: () => "/GetAllProduct",
     }),
+    GetSingleProducts: builder.query({
+      query: (_id) => `/SingleProduct/${_id}`,
+    }),
   }),
 });
 
@@ -23,4 +26,5 @@ export const {
   useGetAllFlashSaleQuery,
   useGetAllBestSellingQuery,
   useGetAllProductsQuery,
+  useGetSingleProductsQuery,
 } = ExclusiveApi;

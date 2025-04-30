@@ -6,17 +6,17 @@ import { useLocation, useParams } from "react-router-dom";
 import ProductInfoSkeleton from "../../components/Skeleton/ProductInfoSkeleton";
 import Heading from "../../components/CommonComponents/Heading";
 import Slider from "react-slick";
-import {
-  useGetProductByCategoryQuery,
-  useGetSingleProductQuery,
-} from "../../Features/Api/ProductApi";
+import { useGetProductByCategoryQuery } from "../../Features/Api/ProductApi";
 import ProductCard from "../../components/CommonComponents/ProductCard";
+import { useGetSingleProductsQuery } from "../../Features/Api/ExclusiveApi";
 
 const ProductDetail = () => {
   const Params = useParams();
-  const { data, error, isLoading } = useGetSingleProductQuery(
-    parseInt(Params?.id)
+  const { data, error, isLoading } = useGetSingleProductsQuery(
+    Params?.id || "67c7d830ddf35e2ce1d4c7ca"
   );
+  console.log(data?.data);
+
   const CategoryData = useGetProductByCategoryQuery(data?.category);
 
   var settings = {
@@ -38,7 +38,7 @@ const ProductDetail = () => {
             <BreadCrumbs />
             <div className="grid grid-cols-2 gap-x-10">
               <div className="">
-                <ImageGallary Image={data?.images} />
+                <ImageGallary Image={data?.data.Image} />
               </div>
               <div className="">
                 <ProductInfo Data={data} />

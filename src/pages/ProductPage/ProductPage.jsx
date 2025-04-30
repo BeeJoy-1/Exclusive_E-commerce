@@ -20,7 +20,7 @@ const ProductPage = () => {
             // isLoading={isLoading}
             // error={error}
           />
-          {/* <ProductRight /> */}
+          <ProductRight />
         </div>
       </div>
     </div>

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import ProductCard from "../CommonComponents/ProductCard";
 import { useGetAllProductQuery } from "../../Features/Api/ProductApi";
+import { useGetAllProductsQuery } from "../../Features/Api/ExclusiveApi";
+import ProductSkeleton from "../../Helpers/ProductSkeleton";
 
 const ProductRight = () => {
-  const { data, error, isLoading } = useGetAllProductQuery();
+  // const { data, error, isLoading } = useGetAllProductQuery();
+  const { data, error, isLoading } = useGetAllProductsQuery();
+
   const [page, setpage] = useState(1);
   const [pagePerShow, setpagePerShow] = useState(9);
-  let totalPage = data?.limit / 9;
+  let totalPage = data?.data?.length / 9;
 
   // Pagination Funtion
   const handlePerItem = (index) => {
@@ -15,13 +19,23 @@ const ProductRight = () => {
     }
   };
 
+  // Option Handeler
+  const handleOption = (e) => {
+    setpagePerShow(parseInt(e.target.value));
+  };
+
   return (
     <div className="w-[70%]">
       <div className="flex items-center justify-end gap-x-2">
         <h1 className="font-poppins font-normal text-[16px] text-text_black000000">
           Show :
         </h1>
-        <select name="" id="" className="px-3 rounded-sm py-1 bg-slate-200">
+        <select
+          name=""
+          id=""
+          className="px-3 rounded-sm py-1 bg-slate-200"
+          onChange={handleOption}
+        >
           <option value="9">9</option>
           <option value="18">18</option>
           <option value="36">36</option>
@@ -29,7 +43,7 @@ const ProductRight = () => {
       </div>
       {/* product  */}
       <div className="flex flex-wrap justify-between">
-        {data?.products
+        {data?.data
           ?.slice(page * 9 - 9, page * pagePerShow)
           .map((item, index) => (
             <div className="w-[30%]" key={index}>
