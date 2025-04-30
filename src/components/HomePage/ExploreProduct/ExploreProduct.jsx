@@ -1,11 +1,9 @@
 import React from "react";
 import ProductCommonLayout from "../../CommonComponents/ProductCommonLayout";
 import ProductCard from "../../CommonComponents/ProductCard";
-import { useGetAllProductQuery } from "../../../Features/Api/ProductApi";
 import { useGetAllProductsQuery } from "../../../Features/Api/ExclusiveApi";
 
 const ExploreProduct = () => {
-  // const { data, error, isLoading } = useGetAllProductQuery();
   const { data, error, isLoading } = useGetAllProductsQuery();
   const AllProducts = data?.data?.map((item) => {
     return item;

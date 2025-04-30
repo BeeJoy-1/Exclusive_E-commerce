@@ -49,15 +49,11 @@ const ProductCard = ({ itemData }) => {
             </h2>
             <div className="flex items-center gap-x-3">
               <span className="text-text_reddb4444 font-medium font-poppins text-[16px] inline-block">
-                $
-                {/* {CalculateDiscountPrice(
-                  itemData?.Price,
-                  itemData?.Discount
-                ).toFixed(2)} */}
-                {parseFloat((itemData.Price || "0").replace(/,/g, "")) -
+                {/* {parseFloat((itemData.Price || "0").replace(/,/g, "")) -
                   (parseFloat((itemData.Price || "0").replace(/,/g, "")) *
                     parseFloat(itemData.Discount || "0")) /
-                    100}
+                    100} */}
+                ${CalculateDiscountPrice(itemData?.Price, itemData?.Discount)}
               </span>
               <span className="text-text_black000000 font-medium font-poppins text-[16px] inline-block opacity-50 line-through">
                 ${itemData ? itemData.Price : 0}

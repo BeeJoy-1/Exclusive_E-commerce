@@ -15,9 +15,8 @@ const ProductDetail = () => {
   const { data, error, isLoading } = useGetSingleProductsQuery(
     Params?.id || "67c7d830ddf35e2ce1d4c7ca"
   );
-  console.log(data?.data);
 
-  const CategoryData = useGetProductByCategoryQuery(data?.category);
+  // const CategoryData = useGetProductByCategoryQuery(data?.data.Category);
 
   var settings = {
     dots: true,
@@ -41,14 +40,14 @@ const ProductDetail = () => {
                 <ImageGallary Image={data?.data.Image} />
               </div>
               <div className="">
-                <ProductInfo Data={data} />
+                <ProductInfo Data={data?.data} />
               </div>
             </div>
           </div>
         )}
 
         {/* Related Item  */}
-        <div className="mt-20">
+        {/* <div className="mt-20">
           <Heading title="Related Item" description={false} />
           <Slider {...settings}>
             {CategoryData.data?.products.map((item, index) => (
@@ -57,7 +56,7 @@ const ProductDetail = () => {
               </div>
             ))}
           </Slider>
-        </div>
+        </div> */}
         {/* Related Item  */}
       </div>
     </div>
