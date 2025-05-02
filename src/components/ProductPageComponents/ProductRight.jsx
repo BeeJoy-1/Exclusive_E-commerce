@@ -43,13 +43,19 @@ const ProductRight = () => {
       </div>
       {/* product  */}
       <div className="flex flex-wrap justify-between">
-        {data?.data
-          ?.slice(page * 9 - 9, page * pagePerShow)
-          .map((item, index) => (
-            <div className="w-[30%]" key={index}>
-              <ProductCard itemData={item} />
-            </div>
-          ))}
+        {isLoading
+          ? [...new Array(6)].map((_, index) => (
+              <div className="w-[30%]" key={index}>
+                <ProductSkeleton />
+              </div>
+            ))
+          : data?.data
+              ?.slice(page * 9 - 9, page * pagePerShow)
+              .map((item, index) => (
+                <div className="w-[30%]" key={index}>
+                  <ProductCard itemData={item} />
+                </div>
+              ))}
       </div>
       <div
         aria-label="Page navigation example "
