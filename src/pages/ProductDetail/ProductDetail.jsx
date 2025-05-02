@@ -6,9 +6,12 @@ import { useLocation, useParams } from "react-router-dom";
 import ProductInfoSkeleton from "../../components/Skeleton/ProductInfoSkeleton";
 import Heading from "../../components/CommonComponents/Heading";
 import Slider from "react-slick";
-import { useGetProductByCategoryQuery } from "../../Features/Api/ProductApi";
+
 import ProductCard from "../../components/CommonComponents/ProductCard";
-import { useGetSingleProductsQuery } from "../../Features/Api/ExclusiveApi";
+import {
+  useGetSingleCategoryQuery,
+  useGetSingleProductsQuery,
+} from "../../Features/Api/ExclusiveApi";
 
 const ProductDetail = () => {
   const Params = useParams();
@@ -16,7 +19,7 @@ const ProductDetail = () => {
     Params?.id || "67c7d830ddf35e2ce1d4c7ca"
   );
 
-  // const CategoryData = useGetProductByCategoryQuery(data?.data.Category);
+  const CategoryData = useGetSingleCategoryQuery(data?.data.Category?._id);
 
   var settings = {
     dots: true,
@@ -26,6 +29,7 @@ const ProductDetail = () => {
     slidesToScroll: 3,
     dots: false,
   };
+  console.log(CategoryData?.data?.data?.Product);
 
   return (
     <div className="py-[140px]">
@@ -47,16 +51,16 @@ const ProductDetail = () => {
         )}
 
         {/* Related Item  */}
-        {/* <div className="mt-20">
+        <div className="mt-20">
           <Heading title="Related Item" description={false} />
           <Slider {...settings}>
-            {CategoryData.data?.products.map((item, index) => (
+            {CategoryData?.data?.data?.Product.map((item, index) => (
               <div className="px-5" key={index}>
                 <ProductCard itemData={item} />
               </div>
             ))}
           </Slider>
-        </div> */}
+        </div>
         {/* Related Item  */}
       </div>
     </div>

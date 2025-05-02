@@ -35,8 +35,8 @@ export const CalculateDiscountPrice = (
       return format(value / 1_000_000_000, "B");
     } else if (value >= 1_000_000) {
       return format(value / 1_000_000, "M");
-    } else if (value >= 1_000) {
-      return format(value / 1_000, "K");
+      // } else if (value >= 1_000) {
+      //   return format(value / 1_000, "K");
     } else {
       return value % 1 === 0 ? value.toString() : value.toFixed(2);
     }
