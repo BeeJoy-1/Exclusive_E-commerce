@@ -8,10 +8,15 @@ const ImageGallary = ({ Image }) => {
   );
 
   const params = useParams();
-
   useEffect(() => {
-    setinitialState(Image[0]);
-  }, [params?.id]);
+    if (Image && Image.length > 0) {
+      setinitialState(Image[0]);
+    }
+  }, [params?.id, Image]);
+
+  // useEffect(() => {
+  //   setinitialState(Image[0]);
+  // }, [params?.id]);
 
   const [zoomStyle, setZoomStyle] = useState({
     transform: "scale(1)",

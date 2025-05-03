@@ -29,7 +29,6 @@ const ProductDetail = () => {
     slidesToScroll: 3,
     dots: false,
   };
-  console.log(CategoryData?.data?.data?.Product);
 
   return (
     <div className="py-[140px]">
@@ -53,13 +52,19 @@ const ProductDetail = () => {
         {/* Related Item  */}
         <div className="mt-20">
           <Heading title="Related Item" description={false} />
-          <Slider {...settings}>
-            {CategoryData?.data?.data?.Product.map((item, index) => (
-              <div className="px-5" key={index}>
-                <ProductCard itemData={item} />
-              </div>
-            ))}
-          </Slider>
+          {CategoryData?.data?.data?.Product?.length ? (
+            <Slider {...settings}>
+              {CategoryData?.data?.data?.Product.map((item, index) => (
+                <div className="px-5" key={index}>
+                  <ProductCard itemData={item} />
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <p className="text-center text-gray-500">
+              No related products found.
+            </p>
+          )}
         </div>
         {/* Related Item  */}
       </div>
