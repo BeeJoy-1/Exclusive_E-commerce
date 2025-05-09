@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FcSearch } from "react-icons/fc";
 import { FaRegHeart, FaUser } from "react-icons/fa";
 import { BsCart } from "react-icons/bs";
@@ -7,6 +7,7 @@ import { LuShoppingBag, LuUser } from "react-icons/lu";
 import { ImCancelCircle } from "react-icons/im";
 import { IoMdStarOutline } from "react-icons/io";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const navItem = [
@@ -31,6 +32,8 @@ const Navbar = () => {
       item: "SignUp",
     },
   ];
+
+  const { TotalQuantity } = useSelector((state) => state.product);
 
   const [account, setAccount] = useState(false);
   const userAccountRef = useRef(null);
@@ -96,9 +99,14 @@ const Navbar = () => {
               <span className="text-black_738 text-2xl cursor-pointer">
                 <FaRegHeart />
               </span>
-              <span className="text-black_738 text-2xl amount cursor-pointer">
-                <BsCart />
-              </span>
+              <Link to="/Cart">
+                <span
+                  className="text-black_738 text-2xl amount cursor-pointer"
+                  data-TotalQuantity={TotalQuantity}
+                >
+                  <BsCart />
+                </span>
+              </Link>
               <span
                 className="text-text_whiteFAFAFA text-xl rounded-full bg-text_reddb4444 p-2 cursor-pointer relative"
                 // onClick={handleAccount}

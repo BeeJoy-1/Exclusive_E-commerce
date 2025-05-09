@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BreadCrumbs from "../../components/CommonComponents/BreadCrumbs";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useGetAllProductQuery } from "../../Features/Api/ProductApi";
 import { useDispatch, useSelector } from "react-redux";
-import { removeCart } from "../../Features/AllSlice/ProductSlice.js";
+import {
+  removeCart,
+  increment,
+  decrement,
+  getTotal,
+} from "../../Features/AllSlice/ProductSlice.js";
 const AddToCart = () => {
   const { data, isLoading, error } = useGetAllProductQuery();
-  const cartitem = useSelector((state) => state.product);
+  const { TotalAmount, TotalQuantity, value } = useSelector(
+    (state) => state.product
+  );
+
   const dispatch = useDispatch();
+
+  //RealTime Update
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [dispatch, localStorage.getItem("CartItem")]);
+
+  //Handle RemoveCart
   const handleRemoveCart = (itemID) => {
     dispatch(removeCart(itemID));
   };
-  console.log(cartitem?.value);
+
+  //Handleincrementitem
+  const Handleincrementitem = (item) => {
+    dispatch(increment(item));
+  };
+  //Handleincrementitem
+  const HandledecrementItem = (item) => {
+    dispatch(decrement(item));
+  };
 
   return (
     <div className="my-20">
@@ -52,7 +75,7 @@ const AddToCart = () => {
               </button>
             </Link>
           )}
-          {cartitem?.value.map((item) => (
+          {value?.map((item) => (
             <div className="mb-2" key={item?._id}>
               <div className="flex justify-between items-center shadow-lg rounded">
                 <div className="flex-1 py-6  flex justify-start relative">
@@ -87,11 +110,17 @@ const AddToCart = () => {
                       className=" w-[25px] text-[20px] font-popins font-normal text-text_black000000"
                     />
                     <div className="flex flex-col items-center justify-center mt-[-2px]">
-                      <span className="" onClick={() => incrementitem(item)}>
+                      <span
+                        className=""
+                        onClick={() => Handleincrementitem(item)}
+                      >
                         <IoIosArrowUp className="inline-block  cursor-pointer" />
                       </span>
 
-                      <span className="" onClick={() => decrementItem(item)}>
+                      <span
+                        className=""
+                        onClick={() => HandledecrementItem(item)}
+                      >
                         <IoIosArrowDown className="inline-block  cursor-pointer" />
                       </span>
                     </div>
@@ -99,7 +128,7 @@ const AddToCart = () => {
                 </div>
                 <div className=" flex-1 flex justify-end py-6">
                   <h1 className="text-[20px] font-popins font-normal text-text_black000000 pr-10">
-                    ${item?.Price * item?.CartQuantity}
+                    $ {item?.Price * item?.CartQuantity}
                   </h1>
                 </div>
               </div>
@@ -123,7 +152,7 @@ const AddToCart = () => {
         </div>
         {/* button */}
 
-        {/* subtotal and copun */}
+        {/* subtotal and coupon */}
         <div className="mt-[80px] flex items-start justify-between">
           <div className="flex items-center gap-x-3">
             <input
@@ -155,7 +184,7 @@ const AddToCart = () => {
                 <button type="button">Quantity:</button>
                 <span className="inline-block font-popins font-normal text-text_black000000 text-[16px]">
                   {" "}
-                  {data?.data?.totalcartitem || 0}
+                  {TotalQuantity || 0}
                 </span>
               </div>
 
@@ -163,7 +192,7 @@ const AddToCart = () => {
                 <button type="button">Total:</button>
                 <span className="inline-block font-popins font-normal text-text_black000000 text-[16px]">
                   {" "}
-                  ${data?.data?.totalamount || 0}
+                  ${TotalAmount || 0}
                 </span>
               </div>
             </div>
