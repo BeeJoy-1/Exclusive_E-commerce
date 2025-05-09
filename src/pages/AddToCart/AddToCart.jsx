@@ -3,8 +3,16 @@ import BreadCrumbs from "../../components/CommonComponents/BreadCrumbs";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useGetAllProductQuery } from "../../Features/Api/ProductApi";
+import { useDispatch, useSelector } from "react-redux";
+import { removeCart } from "../../Features/AllSlice/ProductSlice.js";
 const AddToCart = () => {
   const { data, isLoading, error } = useGetAllProductQuery();
+  const cartitem = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const handleRemoveCart = (itemID) => {
+    dispatch(removeCart(itemID));
+  };
+  console.log(cartitem?.value);
 
   return (
     <div className="my-20">
@@ -17,12 +25,12 @@ const AddToCart = () => {
             </h1>
           </div>
           <div className="flex-1 py-6 text-center">
-            <h1 className="text-[16px] font-poppins font-normal text-text_black000000">
+            <h1 className="text-[16px] font-poppins font-normal text-text_black000000 ml-[-28px]">
               Price
             </h1>
           </div>
           <div className="flex-1 py-6 text-center">
-            <h1 className="text-[16px] font-poppins font-normal text-text_black000000">
+            <h1 className="text-[16px] font-poppins font-normal text-text_black000000 ml-[-23px]">
               Quality
             </h1>
           </div>
@@ -32,7 +40,7 @@ const AddToCart = () => {
             </h1>
           </div>
         </div>
-        {/* carti tem */}
+        {/* cartitem */}
         <div className="custom_scrollbar w-full h-[500px] overflow-y-scroll ">
           {data?.data?.cartITem?.length == 0 && (
             <Link
@@ -44,41 +52,41 @@ const AddToCart = () => {
               </button>
             </Link>
           )}
-          {data?.data?.cartITem?.map((item) => (
-            <div className="mb-10" key={item?._id}>
-              <div className="flex justify-between shadow-lg rounded">
-                <div className="flex-1 py-6  flex justify-start">
-                  <div className="flex pl-10 items-center gap-x-5 relative ">
+          {cartitem?.value.map((item) => (
+            <div className="mb-2" key={item?._id}>
+              <div className="flex justify-between items-center shadow-lg rounded">
+                <div className="flex-1 py-6  flex justify-start relative">
+                  <div className="flex pl-10 items-center gap-x-5  ">
                     <img
-                      src={item?.product?.image[0]}
-                      alt={item?.product?.image[0]}
+                      src={item?.Image[0]}
+                      alt={item?.Image[0]}
                       className="w-[54px] h-[54px] object-contain"
                     />
 
                     <span
-                      className="w-[20px] h-[20px] rounded-full bg-text_reddb4444 absolute text-white_FFFFFF flex justify-center items-center top-[-2%] left-[15%] font-semibold cursor-pointer hover:opacity-70"
+                      className="w-[20px] h-[20px] rounded-full bg-text_reddb4444 absolute text-white_FFFFFF flex justify-center items-center top-[23%] left-[8%] font-semibold cursor-pointer hover:opacity-70"
                       onClick={() => handleRemoveCart(item)}
                     >
                       X
                     </span>
                     <h1 className="text-[16px] font-popins font-normal text-text_black000000 ">
-                      {item?.product.name}
+                      {item?.Name}
                     </h1>
                   </div>
                 </div>
                 <div className=" flex-1  py-6 flex justify-center">
                   <h1 className="text-[20px] font-popins font-normal text-text_black000000">
-                    ${item?.product.price}
+                    ${item?.Price}
                   </h1>
                 </div>
                 <div className=" flex-1  py-6 flex   justify-center">
                   <div className="flex items-center justify-center gap-x-3 w-[100px] rounded border border-gray-400">
                     <input
                       type="text"
-                      value={item?.quantity}
+                      value={item?.CartQuantity}
                       className=" w-[25px] text-[20px] font-popins font-normal text-text_black000000"
                     />
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center mt-[-2px]">
                       <span className="" onClick={() => incrementitem(item)}>
                         <IoIosArrowUp className="inline-block  cursor-pointer" />
                       </span>
@@ -91,16 +99,17 @@ const AddToCart = () => {
                 </div>
                 <div className=" flex-1 flex justify-end py-6">
                   <h1 className="text-[20px] font-popins font-normal text-text_black000000 pr-10">
-                    ${item?.product.price * item?.quantity}
+                    ${item?.Price * item?.CartQuantity}
                   </h1>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        {/* carti tem */}
+        {/* cartitem */}
+
         {/* button */}
-        <div className="mt-10">
+        <div className="mt-16">
           <div className="flex items-center justify-between">
             <Link to={"/ProductDetail"}>
               <button className="px-[48px] py-[16px] bg-transparent  text-text_black000000 text-[18px] font-medium font-popins border-[2px] border-gray-300 rounded">

@@ -6,8 +6,15 @@ import { FaStar } from "react-icons/fa";
 import { CalculateDiscountPrice } from "../../Helpers/MakeDiscount";
 import Star from "./Star";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addtoCart } from "../../Features/AllSlice/ProductSlice";
 
 const ProductCard = ({ itemData }) => {
+  const dispatch = useDispatch();
+  const handleAddtoCart = (ProductItem) => {
+    dispatch(addtoCart(ProductItem));
+  };
+
   return (
     <div className="mt-10">
       <div className="">
@@ -39,7 +46,10 @@ const ProductCard = ({ itemData }) => {
           </div>
 
           <div className=" w-full opacity-0 absolute left-0 bottom-0 group-hover:opacity-100 transition-all ">
-            <div className="bg-text_black000000 text-text_whiteFAFAFA flex items-center justify-center cursor-pointer hover:bg-text_reddb4444 hover:text-white_FFFFFF transition-all h-12">
+            <div
+              className="bg-text_black000000 text-text_whiteFAFAFA flex items-center justify-center cursor-pointer hover:bg-text_reddb4444 hover:text-white_FFFFFF transition-all h-12"
+              onClick={() => handleAddtoCart(itemData)}
+            >
               <h3 className="font-poppins font-medium text-lg ">Add To Cart</h3>
             </div>
           </div>
