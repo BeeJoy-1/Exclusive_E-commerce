@@ -2,6 +2,7 @@ import React from "react";
 import ProductCommonLayout from "../../CommonComponents/ProductCommonLayout";
 import ProductCard from "../../CommonComponents/ProductCard";
 import { useGetAllProductsQuery } from "../../../Features/Api/ExclusiveApi";
+import { Link } from "react-router-dom";
 
 const ExploreProduct = () => {
   const { data, error, isLoading } = useGetAllProductsQuery();
@@ -24,11 +25,13 @@ const ExploreProduct = () => {
             rows={2}
           />
         </div>
-        <div className="pb-20">
-          <button className="px-[48px] py-4 bg-text_reddb4444 rounded text-md font-poppins font-medium text-white_FFFFFF hover:opacity-75 cursor-pointer ">
-            View All Products
-          </button>
-        </div>
+        <Link to="/ProductDetail">
+          <div className="pb-20">
+            <button className="px-[48px] py-4 bg-text_reddb4444 rounded text-md font-poppins font-medium text-white_FFFFFF hover:opacity-75 cursor-pointer ">
+              View All Products
+            </button>
+          </div>
+        </Link>
       </div>
     </div>
   );
