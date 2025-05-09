@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductLeft from "../../components/ProductPageComponents/ProductLeft";
 import ProductRight from "../../components/ProductPageComponents/ProductRight";
 import BreadCrumbs from "../../components/CommonComponents/BreadCrumbs";
@@ -8,7 +8,10 @@ import { useSelector } from "react-redux";
 const ProductPage = () => {
   // const { data, error, isLoading } = useGetAllProductCategoryListQuery();
   const category = useSelector((state) => state?.category?.value);
-  // console.log("Category from Redux: ", category);
+  const [CategoryID, setCategoryID] = useState("");
+  const HandleCategory = (id) => {
+    setCategoryID(id);
+  };
 
   return (
     <div className="container pt-5 pb-20">
@@ -19,8 +22,9 @@ const ProductPage = () => {
             categoryData={category}
             // isLoading={isLoading}
             // error={error}
+            HandleCategory={HandleCategory}
           />
-          <ProductRight />
+          <ProductRight CategoryID={CategoryID} />
         </div>
       </div>
     </div>

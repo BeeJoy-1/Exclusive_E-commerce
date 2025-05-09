@@ -1,6 +1,11 @@
 import React from "react";
 
-const ProductLeft = ({ categoryData, isLoading, error }) => {
+const ProductLeft = ({
+  categoryData,
+  isLoading,
+  error,
+  HandleCategory = () => {},
+}) => {
   // console.log("categoryData", categoryData);
 
   return (
@@ -27,6 +32,7 @@ const ProductLeft = ({ categoryData, isLoading, error }) => {
             <div
               className="flex items-center justify-between hover:bg-gray-200 group cursor-pointer"
               key={index}
+              onClick={() => HandleCategory(item._id)}
             >
               <li className="font-poppins text-md text-text_black000000 font-normal py-3 group-hover:pl-4 transition-all capitalize">
                 {item.Title}

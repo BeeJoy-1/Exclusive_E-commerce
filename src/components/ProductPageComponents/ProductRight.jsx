@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import ProductCard from "../CommonComponents/ProductCard";
-import { useGetAllProductQuery } from "../../Features/Api/ProductApi";
-import { useGetAllProductsQuery } from "../../Features/Api/ExclusiveApi";
+
+import {
+  useGetAllProductsQuery,
+  useGetSingleCategoryQuery,
+} from "../../Features/Api/ExclusiveApi";
 import ProductSkeleton from "../../Helpers/ProductSkeleton";
 
-const ProductRight = () => {
+const ProductRight = ({ CategoryID = null }) => {
   // const { data, error, isLoading } = useGetAllProductQuery();
-  const { data, error, isLoading } = useGetAllProductsQuery();
+  const { data, error, isLoading } = CategoryID
+    ? useGetSingleCategoryQuery(CategoryID)
+    : useGetAllProductsQuery();
 
   const [page, setpage] = useState(1);
   const [pagePerShow, setpagePerShow] = useState(9);
@@ -49,6 +54,14 @@ const ProductRight = () => {
                 <ProductSkeleton />
               </div>
             ))
+          : CategoryID
+          ? data?.data?.Product?.slice(page * 9 - 9, page * pagePerShow).map(
+              (item, index) => (
+                <div className="w-[30%]" key={index}>
+                  <ProductCard itemData={item} />
+                </div>
+              )
+            )
           : data?.data
               ?.slice(page * 9 - 9, page * pagePerShow)
               .map((item, index) => (
