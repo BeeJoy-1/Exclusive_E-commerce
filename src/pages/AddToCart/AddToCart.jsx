@@ -11,6 +11,7 @@ import {
   decrement,
   getTotal,
 } from "../../Features/AllSlice/ProductSlice.js";
+import { CalculateDiscountPrice } from "../../Helpers/MakeDiscount.js";
 const AddToCart = () => {
   const { data, isLoading, error } = useGetAllProductQuery();
   const { TotalAmount, TotalQuantity, value } = useSelector(
@@ -100,7 +101,7 @@ const AddToCart = () => {
                 </div>
                 <div className=" flex-1  py-6 flex justify-center">
                   <h1 className="text-[20px] font-popins font-normal text-text_black000000">
-                    ${item?.Price}
+                    ${CalculateDiscountPrice(item?.Price, item?.Discount)}
                   </h1>
                 </div>
                 <div className=" flex-1  py-6 flex   justify-center">
@@ -129,7 +130,12 @@ const AddToCart = () => {
                 </div>
                 <div className=" flex-1 flex justify-end py-6">
                   <h1 className="text-[20px] font-popins font-normal text-text_black000000 pr-10">
-                    ${getFormattedPrice(item?.Price, item?.CartQuantity)}
+                    $
+                    {getFormattedPrice(
+                      item?.Price,
+                      item?.CartQuantity,
+                      item?.Discount
+                    )}
                   </h1>
                 </div>
               </div>

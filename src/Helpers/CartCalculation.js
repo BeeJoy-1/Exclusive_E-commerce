@@ -1,4 +1,4 @@
-const getFormattedPrice = (rawPrice, quantity = 1) => {
+const getFormattedPrice = (rawPrice, quantity = 1, discountPercentage = 0) => {
   let numericPrice;
 
   if (typeof rawPrice === "string") {
@@ -13,14 +13,21 @@ const getFormattedPrice = (rawPrice, quantity = 1) => {
     numericPrice = rawPrice;
   }
 
-  const total = numericPrice * quantity;
+  const discountedPrice =
+    numericPrice - (numericPrice * discountPercentage) / 100;
+
+  const total = discountedPrice * quantity;
 
   if (isNaN(total)) return "Invalid";
 
+  const formatNumber = (num) => {
+    return Number.isInteger(num) ? num.toString() : num.toFixed(2);
+  };
+
   if (total >= 1_000_000) {
-    return (total / 1_000_000).toFixed(2) + "M";
+    return formatNumber(total / 1_000_000) + "M";
   } else {
-    return total.toFixed(2);
+    return formatNumber(total);
   }
 };
 

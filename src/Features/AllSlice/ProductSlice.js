@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SuccessToast, ErrorToast, InfoToast } from "../../Utils/Toast";
+import { CalculateDiscountPrice } from "../../Helpers/MakeDiscount";
+import { getDiscountedNumericPrice } from "../../Helpers/TotalAmountCalc";
 
 const initialState = {
   value: localStorage.getItem("CartItem")
@@ -55,26 +57,16 @@ export const ProductSlice = createSlice({
     },
     getTotal: (state, action) => {
       const Total = state.value.reduce(
-        (initialvalue, item) => {
-          let { Price, CartQuantity } = item;
+        (initialValue, item) => {
+          const { Price, CartQuantity, Discount } = item;
 
-          // Parse the Price value
-          if (typeof Price === "string") {
-            Price = Price.toUpperCase().trim();
+          const discountedPrice = getDiscountedNumericPrice(Price, Discount); // 👈 use numeric helper
 
-            if (Price.endsWith("M")) {
-              Price = parseFloat(Price) * 1_000_000;
-            } else if (Price.endsWith("K")) {
-              Price = parseFloat(Price) * 1_000;
-            } else {
-              Price = parseFloat(Price);
-            }
-          }
+          const TotalSingleItemPrice = discountedPrice * CartQuantity;
+          initialValue.amount += TotalSingleItemPrice;
+          initialValue.quantity += CartQuantity;
 
-          const TotalSingleItemPrice = Price * CartQuantity;
-          initialvalue.amount += TotalSingleItemPrice;
-          initialvalue.quantity += CartQuantity;
-          return initialvalue;
+          return initialValue;
         },
         {
           amount: 0,
@@ -84,11 +76,10 @@ export const ProductSlice = createSlice({
 
       // Format the total amount using M or K
       const formatWithSuffix = (num) => {
-        if (num >= 1_000_000) {
-          return (num / 1_000_000).toFixed(2) + "M";
-        } else {
-          return num.toString();
-        }
+        if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(2) + "B";
+        if (num >= 1_000_000) return (num / 1_000_000).toFixed(2) + "M";
+
+        return Number.isInteger(num) ? num.toString() : num.toFixed(2);
       };
 
       state.TotalAmount = formatWithSuffix(Total.amount);
