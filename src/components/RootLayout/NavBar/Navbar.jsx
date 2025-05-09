@@ -102,7 +102,7 @@ const Navbar = () => {
               <Link to="/Cart">
                 <span
                   className="text-black_738 text-2xl amount cursor-pointer"
-                  data-TotalQuantity={TotalQuantity}
+                  data-totalquantity={TotalQuantity}
                 >
                   <BsCart />
                 </span>

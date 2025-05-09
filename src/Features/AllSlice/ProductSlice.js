@@ -56,7 +56,21 @@ export const ProductSlice = createSlice({
     getTotal: (state, action) => {
       const Total = state.value.reduce(
         (initialvalue, item) => {
-          const { Price, CartQuantity } = item;
+          let { Price, CartQuantity } = item;
+
+          // Parse the Price value
+          if (typeof Price === "string") {
+            Price = Price.toUpperCase().trim();
+
+            if (Price.endsWith("M")) {
+              Price = parseFloat(Price) * 1_000_000;
+            } else if (Price.endsWith("K")) {
+              Price = parseFloat(Price) * 1_000;
+            } else {
+              Price = parseFloat(Price);
+            }
+          }
+
           const TotalSingleItemPrice = Price * CartQuantity;
           initialvalue.amount += TotalSingleItemPrice;
           initialvalue.quantity += CartQuantity;
@@ -67,9 +81,37 @@ export const ProductSlice = createSlice({
           quantity: 0,
         }
       );
-      state.TotalAmount = Total.amount;
+
+      // Format the total amount using M or K
+      const formatWithSuffix = (num) => {
+        if (num >= 1_000_000) {
+          return (num / 1_000_000).toFixed(2) + "M";
+        } else {
+          return num.toString();
+        }
+      };
+
+      state.TotalAmount = formatWithSuffix(Total.amount);
       state.TotalQuantity = Total.quantity;
     },
+
+    // getTotal: (state, action) => {
+    //   const Total = state.value.reduce(
+    //     (initialvalue, item) => {
+    //       const { Price, CartQuantity } = item;
+    //       const TotalSingleItemPrice = Price * CartQuantity;
+    //       initialvalue.amount += TotalSingleItemPrice;
+    //       initialvalue.quantity += CartQuantity;
+    //       return initialvalue;
+    //     },
+    //     {
+    //       amount: 0,
+    //       quantity: 0,
+    //     }
+    //   );
+    //   state.TotalAmount = Total.amount;
+    //   state.TotalQuantity = Total.quantity;
+    // },
   },
 });
 

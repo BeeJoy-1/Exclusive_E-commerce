@@ -85,7 +85,7 @@ span {
 
   .amount::after {
     position: absolute;
-    content: attr(data-TotalQuantity);
+    content: attr(data-totalquantity);
     left: 39%;
     top: -52%;
     width: 25px;

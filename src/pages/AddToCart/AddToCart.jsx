@@ -4,6 +4,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useGetAllProductQuery } from "../../Features/Api/ProductApi";
 import { useDispatch, useSelector } from "react-redux";
+import getFormattedPrice from "../../Helpers/CartCalculation.js";
 import {
   removeCart,
   increment,
@@ -128,7 +129,7 @@ const AddToCart = () => {
                 </div>
                 <div className=" flex-1 flex justify-end py-6">
                   <h1 className="text-[20px] font-popins font-normal text-text_black000000 pr-10">
-                    $ {item?.Price * item?.CartQuantity}
+                    ${getFormattedPrice(item?.Price, item?.CartQuantity)}
                   </h1>
                 </div>
               </div>
