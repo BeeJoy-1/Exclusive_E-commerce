@@ -16,18 +16,22 @@ export const ProductSlice = createSlice({
   initialState,
   reducers: {
     addtoCart: (state, action) => {
-      const SearchItem = state.value.findIndex((item) => {
-        return item._id == action.payload._id;
-      });
+      const SearchItem = state.value.findIndex(
+        (item) => item._id == action.payload._id
+      );
+      const quantityToAdd = action.payload.CartQuantity || 1;
+
       if (SearchItem >= 0) {
-        state.value[SearchItem].CartQuantity += 1;
-        InfoToast(`${action.payload.Name} Quantity Increased!`);
-        localStorage.setItem("CartItem", JSON.stringify(state.value));
+        state.value[SearchItem].CartQuantity += quantityToAdd;
+        InfoToast(
+          `${action.payload.Name} Quantity Increased by ${quantityToAdd}!`
+        );
       } else {
-        state.value.push({ ...action.payload, CartQuantity: 1 });
+        state.value.push({ ...action.payload, CartQuantity: quantityToAdd });
         SuccessToast(`${action.payload.Name} Added to Cart!`);
-        localStorage.setItem("CartItem", JSON.stringify(state.value));
       }
+
+      localStorage.setItem("CartItem", JSON.stringify(state.value));
     },
     removeCart: (state, action) => {
       const FindItem = state.value.filter((item) => {

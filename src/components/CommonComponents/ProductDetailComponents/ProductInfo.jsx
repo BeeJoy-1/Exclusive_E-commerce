@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { CalculateDiscountPrice } from "../../../Helpers/MakeDiscount";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { TbTruckDelivery } from "react-icons/tb";
 import Star from "../Star";
 import { MdCurrencyExchange } from "react-icons/md";
+import {
+  addtoCart,
+  decrement,
+  increment,
+} from "../../../Features/AllSlice/ProductSlice";
+import { useDispatch } from "react-redux";
 
 const ProductInfo = ({ Data }) => {
   const sizes = [
@@ -13,6 +19,19 @@ const ProductInfo = ({ Data }) => {
     { id: 4, size: "L" },
     { id: 5, size: "XL" },
   ];
+
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
+  // HandleAddtoCart
+  const handleAddtoCart = (ProductItem) => {
+    dispatch(addtoCart(ProductItem));
+  };
+
+  const increment = () => setQuantity((prev) => prev + 1);
+  const decrement = () => {
+    if (quantity > 1) setQuantity((prev) => prev - 1);
+  };
 
   return (
     <div className="flex flex-col items-start gap-y-1 pt-5">
@@ -83,18 +102,30 @@ const ProductInfo = ({ Data }) => {
         {/* button */}
         <div className="mt-10 flex items-center  gap-x-4">
           <div className="flex items-center justify-center">
-            <span className="px-5 py-2 border-2 border-gray-300  rounded-l-lg text-[20px] font-popins text-text_black000000 cursor-pointer hover:text-white_FFFFFF hover:bg-text_reddb4444 hover:border-transparent">
+            <span
+              className="px-5 py-2 border-2 border-gray-300  rounded-l-lg text-[20px] font-popins text-text_black000000 cursor-pointer hover:text-white_FFFFFF hover:bg-text_reddb4444 hover:border-transparent"
+              onClick={decrement}
+            >
               -
             </span>
-            <span className="px-8 py-2 border-2 border-gray-300  text-[20px] font-popins text-text_black000000 border-l-0 cursor-pointer ">
-              2
-            </span>
-            <span className="px-4 py-2 border-2 border-gray-300 rounded-r-lg text-[20px] font-popins text-text_black000000 border-l-0 cursor-pointer hover:text-white_FFFFFF hover:bg-text_reddb4444 hover:border-transparent">
+            <input
+              type="text"
+              className="px-2 py-2 w-[80px] border-2 border-gray-300  text-[20px] font-popins text-text_black000000 border-l-0 cursor-pointer text-center"
+              value={quantity}
+              readOnly
+            />
+            <span
+              className="px-4 py-2 border-2 border-gray-300 rounded-r-lg text-[20px] font-popins text-text_black000000 border-l-0 cursor-pointer hover:text-white_FFFFFF hover:bg-text_reddb4444 hover:border-transparent"
+              onClick={increment}
+            >
               +
             </span>
           </div>
 
-          <button className="py-[12px] px-[48px] bg-text_reddb4444 rounded-[5px] border-none font-popins font-medium text-white_FFFFFF text-[16px]">
+          <button
+            className="py-[12px] px-[48px] bg-text_reddb4444 rounded-[5px] border-none font-popins font-medium text-white_FFFFFF text-[16px]"
+            onClick={() => handleAddtoCart({ ...Data, CartQuantity: quantity })}
+          >
             Add To Cart
           </button>
 
