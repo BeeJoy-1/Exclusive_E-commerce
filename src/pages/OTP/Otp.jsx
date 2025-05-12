@@ -43,7 +43,7 @@ const Otp = () => {
 
   const HandlekeyDown = (e, index) => {
     if (e.key === "ArrowRight" && index < otp.length - 1) {
-      if (!value) {
+      if (!otp[index]) {
         return;
       }
       setinputerr(false);
@@ -66,15 +66,17 @@ const Otp = () => {
       });
       console.log(response);
       if (response.statusText.toLocaleLowerCase() == "ok".toLocaleLowerCase()) {
-        SuccessToast(response?.data?.error);
-        navigate("/Login");
+        SuccessToast(response?.data?.message);
+        setTimeout(() => {
+          navigate("/Login");
+        }, 2500);
       }
     } catch (error) {
       console.error("from opt verification error", error.response.data.message);
       ErrorToast(error.response.data.message);
     } finally {
       setFinalOtp("");
-      setotp(null);
+      setotp(new Array(4).fill(""));
     }
   };
 
@@ -101,18 +103,18 @@ const Otp = () => {
                 <div class="flex flex-col space-y-16">
                   <div class="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                     {otp.map((item, index) => (
-                      <div class="w-16 h-16">
+                      <div class="w-16 h-16" key={index}>
                         <input
                           class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                           type="text"
                           id=""
-                          key={index}
                           name={`input`}
+                          value={otp[index]}
                           maxLength={1}
                           ref={(input) => (inputRef.current[index] = input)}
                           onChange={(e) => HandleInputChange(e, index)}
                           onKeyDown={(e) => HandlekeyDown(e, index)}
-                          onClick={(e) => HandleInput(e, index)}
+                          //   onClick={(e) => HandleInput(e, index)}
                         />
                       </div>
                     ))}
