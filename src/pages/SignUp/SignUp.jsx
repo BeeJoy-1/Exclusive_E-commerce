@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AxiosInstance } from "../../components/Axios/AxiosInstance";
+import { SuccessToast } from "../../Utils/Toast";
+
 const SignUP = () => {
   const [loading, setloading] = useState(false);
   const [singupInfo, setsingUpInfo] = useState({
-    firstName: "",
+    FirstName: "",
     phone: "",
-    email: "",
-    passoword: "",
+    Email_Adress: "",
+    Password: "",
     confrimPassword: "",
     agree: false,
   });
 
-  const handlesingup = (e) => {
+  const navigate = useNavigate();
+
+  const handlesignup = (e) => {
     const { id, value } = e.target;
     setsingUpInfo({
       ...singupInfo,
@@ -21,14 +26,23 @@ const SignUP = () => {
 
   const handleSignup = async () => {
     try {
-      const { firstName, phone, email, passoword, confrimPassword } =
-        singupInfo;
-      if (!firstName || !phone || !email || !passoword || !confrimPassword) {
+      setloading(true);
+      const { FirstName, Email_Adress, Password, confrimPassword } = singupInfo;
+      if (!FirstName || !Email_Adress || !Password || !confrimPassword) {
         alert("Credential Missing");
-      } else if (passoword !== confrimPassword) {
+      } else if (Password !== confrimPassword) {
         alert("Password Not Match");
       } else {
-        setloading(true);
+        //Hit the Database
+        const Response = await AxiosInstance.post("/registration", {
+          FirstName: FirstName,
+          Email_Adress: Email_Adress,
+          Password: Password,
+        });
+        const { data, statusText } = Response;
+        if (statusText.toLocaleLowerCase() == "Ok".toLocaleLowerCase()) {
+          SuccessToast(data.message);
+        }
       }
     } catch (error) {
       // const { message } = error.resposne?.data;
@@ -36,10 +50,10 @@ const SignUP = () => {
     } finally {
       setloading(false);
       setsingUpInfo({
-        firstName: "",
+        FirstName: "",
         phone: "",
-        email: "",
-        passoword: "",
+        Email_Adress: "",
+        Password: "",
         confrimPassword: "",
         agree: false,
       });
@@ -132,15 +146,15 @@ const SignUP = () => {
 
                   <input
                     type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={singupInfo.firstName}
-                    onChange={handlesingup}
+                    id="FirstName"
+                    name="FirstName"
+                    value={singupInfo.FirstName}
+                    onChange={handlesignup}
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
+                {/* <div class="col-span-6 sm:col-span-3">
                   <label
                     for="LastName"
                     class="block text-sm font-medium text-gray-700"
@@ -151,12 +165,12 @@ const SignUP = () => {
                   <input
                     type="text"
                     value={singupInfo.phone}
-                    onChange={handlesingup}
+                    onChange={handlesignup}
                     id="phone"
                     name="phone"
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
-                </div>
+                </div> */}
 
                 <div class="col-span-6">
                   <label
@@ -169,10 +183,10 @@ const SignUP = () => {
 
                   <input
                     type="email"
-                    id="email"
-                    value={singupInfo.email}
-                    name="email"
-                    onChange={handlesingup}
+                    id="Email_Adress"
+                    value={singupInfo.Email_Adress}
+                    name="Email_Adress"
+                    onChange={handlesignup}
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
@@ -188,10 +202,10 @@ const SignUP = () => {
 
                   <input
                     type="password"
-                    id="passoword"
-                    name="password"
-                    value={singupInfo.passoword}
-                    onChange={handlesingup}
+                    id="Password"
+                    name="Password"
+                    value={singupInfo.Password}
+                    onChange={handlesignup}
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
@@ -208,7 +222,7 @@ const SignUP = () => {
                     type="password"
                     id="confrimPassword"
                     value={singupInfo.confrimPassword}
-                    onChange={handlesingup}
+                    onChange={handlesignup}
                     name="confrimPasswords"
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
@@ -221,7 +235,7 @@ const SignUP = () => {
                       id="agree"
                       name="agree"
                       value={singupInfo.agree}
-                      onChange={handlesingup}
+                      onChange={handlesignup}
                       class="size-5 rounded-md border-gray-200 bg-white shadow-sm"
                     />
 
@@ -251,7 +265,7 @@ const SignUP = () => {
                   {loading ? (
                     <button
                       type="button"
-                      class="inline-blockz shrink-0 rounded-md border  bg-redDB4444 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 "
+                      class="inline-blockz shrink-0 rounded-md border bg-red-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 "
                     >
                       Loadin...
                     </button>
@@ -259,7 +273,7 @@ const SignUP = () => {
                     <button
                       type="button"
                       onClick={handleSignup}
-                      class="inline-blockz shrink-0 rounded-md border  bg-redDB4444 px-12 py-3 text-sm font-medium text-blue-500 transition hover:bg-transparent hover:bg-blue-600 hover:text-white "
+                      class="inline-blockz shrink-0 rounded-md border  bg-white_FFFFFF px-12 py-3 text-sm font-medium text-blue-500 transition  hover:text-white hover:bg-blue-500"
                     >
                       Sign up
                     </button>

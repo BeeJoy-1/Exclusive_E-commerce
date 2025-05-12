@@ -17,6 +17,7 @@ import Contact from "./pages/Contact/Contact";
 import SignUP from "./pages/SignUp/SignUp";
 import Error from "./pages/Error/Error";
 import ForgotPassword from "./pages/ForgetPass/ForgetPass";
+import Otp from "./pages/OTP/Otp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path="/Cart" element={<AddToCart />}></Route>
         <Route path="/SignUP" element={<SignUP />}></Route>
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
+        <Route path="/verifyotp/:email" element={<Otp />}></Route>
         <Route path="*" element={<Error />}></Route>
       </Route>
     </Route>
