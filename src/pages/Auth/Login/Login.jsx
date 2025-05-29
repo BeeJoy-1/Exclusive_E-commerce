@@ -3,10 +3,13 @@ import LoginImg from "../../../assets/login/Login.gif";
 import { useFormik } from "formik";
 import { LoginSchema } from "../../../Validation/Schema/LoginSchema";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AxiosInstance } from "../../../components/Axios/AxiosInstance";
+import { ErrorToast, SuccessToast } from "../../../Utils/Toast";
 
 const Login = () => {
   const [eye, seteye] = useState(false);
+  const navigate = useNavigate();
 
   const InitialValues = {
     emailOrphone: "",
@@ -15,8 +18,25 @@ const Login = () => {
   const formik = useFormik({
     initialValues: InitialValues,
     validationSchema: LoginSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const response = await AxiosInstance.post(
+        "/Login",
+        {
+          Email_Adress: values.emailOrphone,
+          Password: values.password,
+        },
+        {
+          withCredentials: true, // Include cookies
+        }
+      );
+      if (response.statusText.toLowerCase() == "ok".toLowerCase()) {
+        SuccessToast("Login Succesfull!");
+        setTimeout(() => {
+          navigate("/Home");
+        }, 1500);
+      } else {
+        ErrorToast("Wrong Credentials!");
+      }
     },
   });
 
