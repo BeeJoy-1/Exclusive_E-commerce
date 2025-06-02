@@ -19,23 +19,28 @@ const Login = () => {
     initialValues: InitialValues,
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
-      const response = await AxiosInstance.post(
-        "/Login",
-        {
-          Email_Adress: values.emailOrphone,
-          Password: values.password,
-        },
-        {
-          withCredentials: true, // Include cookies
+      try {
+        const response = await AxiosInstance.post(
+          "/Login",
+          {
+            Email_Adress: values.emailOrphone,
+            Password: values.password,
+          },
+          {
+            withCredentials: true, //set Cookies or token
+          }
+        );
+
+        if (response.statusText.toLowerCase() === "ok") {
+          SuccessToast("Login Successful!");
+          setTimeout(() => navigate("/Home"), 1500);
         }
-      );
-      if (response.statusText.toLowerCase() == "ok".toLowerCase()) {
-        SuccessToast("Login Succesfull!");
-        setTimeout(() => {
-          navigate("/Home");
-        }, 1500);
-      } else {
-        ErrorToast("Wrong Credentials!");
+      } catch (error) {
+        const errorMsg =
+          error?.response?.data?.message ||
+          error?.response?.data?.msg ||
+          "Login failed. Please try again.";
+        ErrorToast(errorMsg);
       }
     },
   });
