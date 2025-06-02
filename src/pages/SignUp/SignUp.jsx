@@ -7,7 +7,6 @@ const SignUP = () => {
   const [loading, setloading] = useState(false);
   const [singupInfo, setsingUpInfo] = useState({
     FirstName: "",
-    phone: "",
     Email_Adress: "",
     Password: "",
     confrimPassword: "",
@@ -51,7 +50,6 @@ const SignUP = () => {
       setloading(false);
       setsingUpInfo({
         FirstName: "",
-        phone: "",
         Email_Adress: "",
         Password: "",
         confrimPassword: "",
@@ -153,24 +151,6 @@ const SignUP = () => {
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
-
-                {/* <div class="col-span-6 sm:col-span-3">
-                  <label
-                    for="LastName"
-                    class="block text-sm font-medium text-gray-700"
-                  >
-                    phone <span className="text-redDB4444">* </span>
-                  </label>
-
-                  <input
-                    type="text"
-                    value={singupInfo.phone}
-                    onChange={handlesignup}
-                    id="phone"
-                    name="phone"
-                    class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                  />
-                </div> */}
 
                 <div class="col-span-6">
                   <label
